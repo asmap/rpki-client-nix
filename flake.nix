@@ -26,5 +26,9 @@
       rpki-client = import ./default.nix {inherit pkgs rpki-client-src rpki-openbsd-src;};
     in rec {
       defaultPackage = rpki-client;
+
+      # Run without cloning, must create a `cachedir` first to host fetched data
+      # nix run .# -- -d cachedir
+      apps.rpki-client = utils.lib.mkApp {drv = rpki-client;};
     });
 }
