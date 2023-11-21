@@ -1,22 +1,13 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{
+  pkgs,
+  rpki-client-src,
+  rpki-openbsd-src,
+}:
 pkgs.stdenv.mkDerivation rec {
   name = "rpki-client";
-  version = "8.2";
+  version = "8.6";
 
-  src = pkgs.fetchFromGitHub {
-    owner = "rpki-client";
-    repo = "rpki-client-portable";
-    rev = version;
-    hash = "sha256-oErUjZn/a/Ka70+Z8Wb2L7UIulGPjF81bYAQ2wPvWfo=";
-  };
-
-  openbsd_src = pkgs.fetchFromGitHub {
-    owner = "rpki-client";
-    repo = "rpki-client-openbsd";
-    rev = "rpki-client-8.2";
-    hash = "sha256-zC3vbQLLWgImS+lYNWbHzkLrZTJvgPfH+W+FiSnH8Aw=";
-  };
+  src = rpki-client-src;
 
   buildInputs = with pkgs; [
     libressl
@@ -25,11 +16,12 @@ pkgs.stdenv.mkDerivation rec {
     autoconf
     libtool
     rsync
+    zlib
   ];
 
   unpackPhase = ''
     mkdir -p openbsd
-    cp -R ${openbsd_src}/* openbsd
+    cp -R ${rpki-openbsd-src}/* openbsd
     cp -R ${src}/* .
     chmod 700 -R .
   '';
