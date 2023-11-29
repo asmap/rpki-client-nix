@@ -1,5 +1,5 @@
 {
-  pkgs,
+  pkgs ? import <nixpkgs> { } ,
   rpki-client-src,
   rpki-openbsd-src,
 }:
