@@ -1,23 +1,16 @@
-{ pkgs ? import <nixpkgs> { } }:
-
+{
+  pkgs,
+  rpki-client-src,
+  rpki-openbsd-src,
+}:
+# build the package
 pkgs.stdenv.mkDerivation rec {
   name = "rpki-client";
-  version = "8.2";
+  version = "8.6";
 
-  src = pkgs.fetchFromGitHub {
-    owner = "rpki-client";
-    repo = "rpki-client-portable";
-    rev = version;
-    hash = "sha256-oErUjZn/a/Ka70+Z8Wb2L7UIulGPjF81bYAQ2wPvWfo=";
-  };
+  src = rpki-client-src;
 
-  openbsd_src = pkgs.fetchFromGitHub {
-    owner = "rpki-client";
-    repo = "rpki-client-openbsd";
-    rev = "rpki-client-8.2";
-    hash = "sha256-zC3vbQLLWgImS+lYNWbHzkLrZTJvgPfH+W+FiSnH8Aw=";
-  };
-
+  # Dependencies required at build time
   buildInputs = with pkgs; [
     libressl
     expat
@@ -25,17 +18,26 @@ pkgs.stdenv.mkDerivation rec {
     autoconf
     libtool
     rsync
+    zlib
   ];
 
+  # Prepare the source directory before configuring and building.
+  # In this case, we set up the openbsd directory, which rpki-client-portable expects,
+  # with the rpki-openbsd-src attribute we set up as a flake input.
   unpackPhase = ''
     mkdir -p openbsd
-    cp -R ${openbsd_src}/* openbsd
+    cp -R ${rpki-openbsd-src}/* openbsd
     cp -R ${src}/* .
     chmod 700 -R .
   '';
 
+  # Configure with the given scripts, but point to our nix-specific $out directory
   configurePhase = ''
     ./autogen.sh
     ./configure --prefix=$out
   '';
+
+  # The default buildPhase for stdenv.mkDerivation is "make"
+  # which is what the project wants in this case.
+  # So we don't need to modify the buildPhase.
 }
