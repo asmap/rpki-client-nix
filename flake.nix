@@ -1,5 +1,5 @@
 {
-  description = "RPKI Client v8.6";
+  description = "RPKI Client v9.1";
 
   # To build the package, run "nix build" in the current directory.
   # This will build the rpki-client binary and put it in 'result/bin/'.
