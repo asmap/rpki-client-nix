@@ -1,5 +1,5 @@
 {
-  description = "RPKI Client v9.1";
+  description = "RPKI Client";
 
   # To build the package, run "nix build" in the current directory.
   # This will build the rpki-client binary and put it in 'result/bin/'.
@@ -11,14 +11,14 @@
     utils.url = "github:numtide/flake-utils";
     # The RPKI portable client source, pinned to a specific version
     rpki-client-src = {
-      url = "github:rpki-client/rpki-client-portable/a8aadf11866008666e17c65da76132659942fe2c"; # v9.1
+      url = "github:rpki-client/rpki-client-portable/12c58dcd8f61d18567fda0689ba64cb4b8c70a2d"; # v9.3
       flake = false;
     };
     # The openbsd shim of rpki-client-portable, which gets pulled into rpki-client at build time
     # Since Nix can't fetch external sources (or access the Internet) at build time, we pull it in explicitly.
     # See https://github.com/rpki-client/rpki-client-portable/blob/master/update.sh
     rpki-openbsd-src = {
-      url = "github:rpki-client/rpki-client-openbsd/a59ae351b4f900cf90b01e755118290047fcdb28"; # v9.1
+      url = "github:rpki-client/rpki-client-openbsd/dfa32b728c451dab0c97c854fbe23bc7b9be25ad"; # v9.3
       flake = false;
     };
   };
@@ -39,7 +39,7 @@
       defaultPackage = rpki-client;
 
       # To run locally without cloning this repo, create a `cachedir` locally to hold RPKI data.
-      # Then run "nix run github:fjahr/rpki-client-nix -- -d cachedir"
+      # Then run "nix run github:asmap/rpki-client-nix -- -d cachedir"
       apps.rpki-client = utils.lib.mkApp {drv = rpki-client;};
     });
 }
