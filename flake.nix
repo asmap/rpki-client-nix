@@ -6,7 +6,7 @@
 
   inputs = {
     # We pin to a set nixpkgs version
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     # A lib to help build packages for multiple target systems
     utils.url = "github:numtide/flake-utils";
     # The RPKI portable client source, pinned to a specific version
