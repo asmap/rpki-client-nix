@@ -6,19 +6,19 @@
 
   inputs = {
     # We pin to a set nixpkgs version
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     # A lib to help build packages for multiple target systems
     utils.url = "github:numtide/flake-utils";
     # The RPKI portable client source, pinned to a specific version
     rpki-client-src = {
-      url = "github:rpki-client/rpki-client-portable/12c58dcd8f61d18567fda0689ba64cb4b8c70a2d"; # v9.3
+      url = "github:rpki-client/rpki-client-portable/98954f463a60c1aa1f9c0c0de83370558ba452c7"; # v9.4
       flake = false;
     };
     # The openbsd shim of rpki-client-portable, which gets pulled into rpki-client at build time
     # Since Nix can't fetch external sources (or access the Internet) at build time, we pull it in explicitly.
     # See https://github.com/rpki-client/rpki-client-portable/blob/master/update.sh
     rpki-openbsd-src = {
-      url = "github:rpki-client/rpki-client-openbsd/dfa32b728c451dab0c97c854fbe23bc7b9be25ad"; # v9.3
+      url = "github:rpki-client/rpki-client-openbsd/27f8f58679530181c9e2f546046b714ad6f85b8c"; # v9.4
       flake = false;
     };
   };
