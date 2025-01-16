@@ -1,5 +1,9 @@
 {version}: let
   versionHashes = {
+    "9.4" = {
+      portable = "98954f463a60c1aa1f9c0c0de83370558ba452c7";
+      openbsd = "27f8f58679530181c9e2f546046b714ad6f85b8c";
+    };
     "9.3" = {
       portable = "12c58dcd8f61d18567fda0689ba64cb4b8c70a2d";
       openbsd = "2e884707a601e39d2ff82695f33bd3374fdc4135";
