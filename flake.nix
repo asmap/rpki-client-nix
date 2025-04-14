@@ -36,7 +36,7 @@
       rpki-client = import ./default.nix {inherit pkgs rpki-client-src rpki-openbsd-src;};
     in rec {
       # This exposes a package under the namespace rpki-client.defaultPackage.<system>
-      defaultPackage = rpki-client;
+      packages.default = rpki-client;
 
       # To run locally without cloning this repo, create a `cachedir` locally to hold RPKI data.
       # Then run "nix run github:asmap/rpki-client-nix -- -d cachedir"
