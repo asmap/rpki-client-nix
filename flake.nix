@@ -11,14 +11,14 @@
     utils.url = "github:numtide/flake-utils";
     # The RPKI portable client source, pinned to a specific version
     rpki-client-src = {
-      url = "github:rpki-client/rpki-client-portable/36abf5dbc510ef98e5139f776806b723d3bcc705"; # v9.5
+      url = "github:rpki-client/rpki-client-portable/5f446a23b2df68b821fdba4310399465e8e0247c"; # v9.6
       flake = false;
     };
     # The openbsd shim of rpki-client-portable, which gets pulled into rpki-client at build time
     # Since Nix can't fetch external sources (or access the Internet) at build time, we pull it in explicitly.
     # See https://github.com/rpki-client/rpki-client-portable/blob/master/update.sh
     rpki-openbsd-src = {
-      url = "github:rpki-client/rpki-client-openbsd/f89bbe32af942a4dac8d2f9c13058ff63afa11d3"; # v9.5
+      url = "github:rpki-client/rpki-client-openbsd/9729e89d562260b1102a76d3623d8757f20e01e3"; # v9.6
       flake = false;
     };
   };
