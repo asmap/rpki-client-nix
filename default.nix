@@ -6,7 +6,7 @@
 # build the package
 pkgs.stdenv.mkDerivation rec {
   name = "rpki-client";
-  version = "9.6";
+  version = "9.7";
 
   src = rpki-client-src;
 
